@@ -18,11 +18,11 @@ public class RecipeofButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         //do your stuff when highlighted
-        infoText.SetActive(true);
+        //infoText.SetActive(true);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        infoText.SetActive(false);
+        //infoText.SetActive(false);
     }
 
     // Update is called once per frame
