@@ -19,51 +19,67 @@ public class PlayerController : MonoBehaviour
 
     private int inventoryOn = -1;
     public GameObject inventoryPanel;
-    public PlayerCam camScript;
+    PlayerCam camScript;
+    PlayerMovment playerMovment;
+    private bool inventoryIsClosed = true;
 
+    private void Start()
+    {
+        playerMovment = GetComponent<PlayerMovment>();
+        camScript = FindAnyObjectByType<PlayerCam>();
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(changeWeaponKey))
+        if (inventoryIsClosed)
         {
-            isWeaponChanging = true;
-            OnWeaponChangeUpdate?.Invoke(isWeaponChanging);
-        }
-        else
-            isWeaponChanging=false;
+            if (Input.GetKeyDown(changeWeaponKey))
+            {
+                isWeaponChanging = true;
+                OnWeaponChangeUpdate?.Invoke(isWeaponChanging);
+            }
+            else
+                isWeaponChanging = false;
 
-        if (Input.GetKeyDown(attackWeaponKey))
-        {
-            OnAttackUpdate?.Invoke(); 
-        }
+            if (Input.GetKeyDown(attackWeaponKey))
+            {
+                OnAttackUpdate?.Invoke();
+            }
 
-        if (Input.GetKeyDown(grabKey))
-        {
-            isGrabing = true;
-            OnGrabingUpdate?.Invoke(isGrabing);
+            if (Input.GetKeyDown(grabKey))
+            {
+                isGrabing = true;
+                OnGrabingUpdate?.Invoke(isGrabing);
+            }
+            else
+                isGrabing = false;
         }
-        else 
-            isGrabing=false;
 
         if (Input.GetKeyDown(openInventoryKey))
         {
-            if (inventoryOn == 1)
-            {
-                inventoryPanel.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                //camScript.enabled = true;
-                camScript.useScript = true;
-            }
-            else
+            if (inventoryIsClosed)
             {
                 inventoryPanel.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                //camScript.enabled = false;
+
+                playerMovment.enabled = false;
                 camScript.useScript = false;
+
+                inventoryIsClosed = false;
             }
-            inventoryOn *= (-1);
+            else
+            {
+                inventoryPanel.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+
+                playerMovment.enabled = true;
+                camScript.useScript = true;
+
+                inventoryIsClosed =true;
+            }
         }
+       
     }
 }
