@@ -36,7 +36,7 @@ public class ShowCraftingRecipe : MonoBehaviour, IPointerEnterHandler, IPointerE
         if (once)
         {
             mousePosition = Input.mousePosition;
-            infoText.transform.position = transform.position + new Vector3(-90, -20, 0);
+            infoText.transform.position = transform.position + new Vector3(-150, -20, 0);
         }
         
 

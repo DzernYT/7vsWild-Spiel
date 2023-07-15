@@ -14,8 +14,8 @@ public class PlayerMovment : MonoBehaviour
 
     public float groundDrag;
 
-    private bool isSprinting;
-    private bool isWalking;
+    public bool isSprinting;
+    public bool isWalking;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -166,7 +166,7 @@ public class PlayerMovment : MonoBehaviour
 
 
         // Mode - Sprinting
-        if (grounded && !isCrouching && Input.GetKey(sprintKey) && moveDirection != Vector3.zero )
+        if (grounded && !isCrouching && Input.GetKey(sprintKey) && moveDirection != Vector3.zero && SurvivalManager.instance.hasStamina == true )
         {
             moveSpeed = sprintSpeed; 
             isSprinting = true;

@@ -51,15 +51,62 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    //Item ausgewählt
     void ChangeSelectedSlot(int newValue)
     {
+      
         if (selectedSlot >= 0)
         {
             inventorySlots[selectedSlot].Deselect();
+            
+            if (items != null && items.Count > 0)
+            {
+                if(newValue < items.Count)
+                {
+                    if(items[newValue] != null)
+                    {
+                        Item selectedItem = items[newValue];
+                        Debug.Log(selectedItem);
+                        ShowItem.instance.hideItem(selectedItem);
+                    }
+                   
+                }
+
+
+            }
+            else
+            {
+                ShowItem.instance.hideAll();
+            }
+            
         }
+            
 
         inventorySlots[newValue].Select();
+        
+        
+        
+        if(items != null && items.Count > 0)
+        {
+            if (newValue < items.Count)
+            {
+                if(items[newValue] != null)
+                {
+                    Item selectedItem = items[newValue];
+                    Debug.Log(selectedItem);
+                    ShowItem.instance.showItem(selectedItem);
+                }
+
+            }
+            else
+            {
+                ShowItem.instance.hideAll();
+            }
+        }
+        
+        
         selectedSlot = newValue;
+        
     }
 
     public bool AddItem(Item item)
@@ -180,6 +227,7 @@ public class InventoryManager : MonoBehaviour
                     {
                         Destroy(itemInSlot.gameObject);
                         itemInSlot = null;
+                        items.RemoveAt(i);
                     }
                     else
                     {
@@ -253,6 +301,13 @@ public class InventoryManager : MonoBehaviour
         }
 
         return true;
+    }
+
+    public int itemSelectedCount()
+    {
+        InventorySlot slot = inventorySlots[selectedSlot];
+        InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+        return itemInSlot.count;
     }
 
 }

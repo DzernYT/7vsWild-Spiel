@@ -18,6 +18,9 @@ public class Item : ScriptableObject {
     [Header("Both")]
     public Sprite image;
 
+    [Header("Consumable")]
+    public bool isConsumable = false;
+
 }
 
 public enum ItemType {

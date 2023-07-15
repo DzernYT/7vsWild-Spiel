@@ -12,8 +12,8 @@ public class RecipeofButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private GameObject infoText;
     void Start()
     {
-        infoText = GameObject.FindGameObjectWithTag("InfoText");
-        infoText.SetActive(false);
+        //infoText = GameObject.FindGameObjectWithTag("InfoText");
+        //infoText.SetActive(false);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

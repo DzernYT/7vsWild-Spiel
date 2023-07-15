@@ -74,7 +74,7 @@ public class ArmsController : MonoBehaviour
         else
         {
             rightHandIK.weight = 0;
-            WeaponContainer.SetActive(false);
+            //WeaponContainer.SetActive(false);
         }
     }
 
